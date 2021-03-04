@@ -1,12 +1,15 @@
 package schl;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Polygon;
 
 import javax.swing.JPanel;
 
 public class SierpinskiTrianglePanel extends JPanel {
 		private int order = 0;
+		private static int green = 0;
 
 		/** Set a new order */
 		public void setOrder(int order) {
@@ -23,19 +26,25 @@ public class SierpinskiTrianglePanel extends JPanel {
 			Point p1 = new Point(getWidth() / 2, 10);
 			Point p2 = new Point(10, getHeight() - 10);
 			Point p3 = new Point(getWidth() - 10, getHeight() - 10);
-			//int xpoints[] = {p1.x, p2.x, p3.x};
-		   // int ypoints[] = {p1.y, p2.y, p3.y};
-		   // int npoints = 3;
-		    //g.fillPolygon(xpoints, ypoints, npoints);
 			displayTriangles(g, order, p1, p2, p3);
 		}
 
 		private static void displayTriangles(Graphics g, int order, Point p1, Point p2, Point p3) {
 			if (order == 0) {
-				// Draw a triangle to connect three points
-				g.drawLine(p1.x, p1.y, p2.x, p2.y);
-				g.drawLine(p1.x, p1.y, p3.x, p3.y);
-				g.drawLine(p2.x, p2.y, p3.x, p3.y);
+				int x[] = new int [3];
+				int y[] = new int [3];
+				x[0]=p1.x; x[1]=p2.x; x[2]=p3.x;
+				y[0]=p1.y; y[1]=p2.y; y[2]=p3.y;
+				int n = 3;
+
+				Polygon p = new Polygon(x, y, n); 
+				if (green < 250) {
+					green = 0;
+				}
+				Color c = new Color (0, green, 255);
+				g.setColor(c);
+				green+=5;
+				g.fillPolygon(p); 
 			} else {
 				// Get the midpoint on each edge of the triangle
 				Point p12 = midpoint(p1, p2);
@@ -52,3 +61,4 @@ public class SierpinskiTrianglePanel extends JPanel {
 			return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
 		}
 	}
+
