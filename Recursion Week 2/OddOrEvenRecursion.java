@@ -15,4 +15,7 @@ public class OddOrEvenRecursion {
 			return even (a -2);
 		}
 	}
+	public static boolean odd (int a) {
+		return !even(a);
+	}
 }
