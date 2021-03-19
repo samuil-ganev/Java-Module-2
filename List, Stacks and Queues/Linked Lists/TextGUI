@@ -1,0 +1,111 @@
+package schl;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.awt.event.ActionEvent;
+
+public class TextGUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtField;
+	private java.util.LinkedList<Integer> list = new java.util.LinkedList<>();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TextGUI frame = new TextGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public TextGUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 709, 429);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(5, 5, 680, 387);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(10, 160, 660, 162);
+		panel.add(textArea);
+
+		JButton btnSort = new JButton("Sort");
+		btnSort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				list.sort(null);
+				textArea.removeAll();
+				textArea.setText(list.toString());
+			}
+		});
+		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnSort.setBounds(10, 335, 213, 32);
+		panel.add(btnSort);
+
+		JButton btnShuffle = new JButton("Shuffle");
+		btnShuffle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Collections.shuffle(list);
+				textArea.removeAll();
+				textArea.setText(list.toString());
+			}
+		});
+		btnShuffle.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnShuffle.setBounds(233, 335, 213, 32);
+		panel.add(btnShuffle);
+
+		JButton btnRevrse = new JButton("Reverse");
+		btnRevrse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Collections.sort(list, Collections.reverseOrder());
+				textArea.removeAll();
+				textArea.setText(list.toString());
+			}
+		});
+		btnRevrse.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnRevrse.setBounds(456, 335, 214, 32);
+		panel.add(btnRevrse);
+
+		txtField = new JTextField();
+		txtField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integer a = new Integer(txtField.getText());
+				if (!list.contains(a)) {
+					list.add(a);
+				}
+				textArea.removeAll();
+				textArea.setText(list.toString());
+			}
+		});
+		txtField.setBounds(10, 48, 660, 25);
+		panel.add(txtField);
+		txtField.setColumns(10);
+
+	}
+}
