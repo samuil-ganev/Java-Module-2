@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class readFromFile {
+public class ReadFromFile {
 
 	public static void main(String[] args) throws IOException {
 		String fileName = "test.txt";
